@@ -1,6 +1,6 @@
 name: whistle_feed_staging
 description: a staging plugin
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/prakashvalueleaf/whistle_feed_staging
 
 environment:
