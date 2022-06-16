@@ -326,7 +326,19 @@ class _MyHomePageState extends State<Whistle_feed> {
                     print("get index of click  ${firstPencil[indexvalue1].brandname}");
 
                     setState(() {
-                      Navigator.pushNamed(context, '/Whistlecta_webview');
+                      webviewurl="${firstPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=com.buddyloan.vls";
+
+
+                      print(webviewurl);
+                      if(webviewurl!="")
+                      {
+                        print('urlisnotemptyy');
+                        print(webviewurl);
+                        Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                        Navigator.pushNamed(context, '/Whistlecta_webview');
+
+                      }
 
                     });
 
@@ -478,7 +490,19 @@ class _MyHomePageState extends State<Whistle_feed> {
                   print("get index of click  ${firstPencil[indexvalue1].brandname}");
 
                   setState(() {
-                    Navigator.pushNamed(context, '/Whistlecta_webview');
+                    webviewurl="${firstPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=com.buddyloan.vls";
+
+
+                    print(webviewurl);
+                    if(webviewurl!="")
+                    {
+                      print('urlisnotemptyy');
+                      print(webviewurl);
+                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                      Navigator.pushNamed(context, '/Whistlecta_webview');
+
+                    }
 
                   });
 
@@ -620,7 +644,19 @@ class _MyHomePageState extends State<Whistle_feed> {
                 onTap: (){
                   setState(() {
                     print('checkclickingindex${secondPencil[indexvalue2].brandname}');
-                    Navigator.pushNamed(context, '/Whistlecta_webview');
+                    webviewurl="${secondPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=com.buddyloan.vls";
+
+
+                    print(webviewurl);
+                    if(webviewurl!="")
+                    {
+                      print('urlisnotemptyy');
+                      print(webviewurl);
+                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                      Navigator.pushNamed(context, '/Whistlecta_webview');
+
+                    }
 
                   });
                 },
@@ -738,7 +774,19 @@ class _MyHomePageState extends State<Whistle_feed> {
                   print("get index of click  ${firstPencil[indexvalue1].brandname}");
 
                   setState(() {
-                    Navigator.pushNamed(context, '/Whistlecta_webview');
+                    webviewurl="${firstPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=com.buddyloan.vls";
+
+
+                    print(webviewurl);
+                    if(webviewurl!="")
+                    {
+                      print('urlisnotemptyy');
+                      print(webviewurl);
+                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                      Navigator.pushNamed(context, '/Whistlecta_webview');
+
+                    }
 
                   });
 
@@ -881,7 +929,19 @@ class _MyHomePageState extends State<Whistle_feed> {
                 onTap: (){
                   setState(() {
                     print('checkclickingindex${secondPencil[indexvalue2].brandname}');
-                    Navigator.pushNamed(context, '/Whistlecta_webview');
+                    webviewurl="${secondPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=com.buddyloan.vls";
+
+
+                    print(webviewurl);
+                    if(webviewurl!="")
+                    {
+                      print('urlisnotemptyy');
+                      print(webviewurl);
+                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                      Navigator.pushNamed(context, '/Whistlecta_webview');
+
+                    }
 
                   });
                 },
@@ -988,7 +1048,19 @@ class _MyHomePageState extends State<Whistle_feed> {
                 onTap: (){
                   setState(() {
                     print("get index value of pencil3${thirdpencil[indexvalue3].brandname}");
-                    Navigator.pushNamed(context, '/Whistlecta_webview');
+                    webviewurl="${thirdpencil[indexvalue1].tracker}&token=${ptoken}&auth_url=com.buddyloan.vls";
+
+
+                    print(webviewurl);
+                    if(webviewurl!="")
+                    {
+                      print('urlisnotemptyy');
+                      print(webviewurl);
+                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                      Navigator.pushNamed(context, '/Whistlecta_webview');
+
+                    }
 
                   });
                 },
