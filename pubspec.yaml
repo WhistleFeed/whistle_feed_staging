@@ -1,6 +1,6 @@
 name: whistle_feed_staging
 description: a staging plugin
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/prakashvalueleaf/whistle_feed_staging
 
 environment:
@@ -14,6 +14,7 @@ dependencies:
   http: ^0.12.0+2
   device_info: ^0.4.2+4
   flutter_inappwebview: ^4.0.0
+  url_launcher: ^5.7.10
 
 dev_dependencies:
   flutter_test:

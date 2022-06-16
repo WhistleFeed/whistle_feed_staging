@@ -36,7 +36,7 @@ class _myappstate extends State<ShowWhistleAdds>
      create: (context)=> Whistle_Provider(),
    child: MaterialApp (
      routes: {
-       '/Whistlecta_webview': (context) => MyWebViewForWhistlefeed(""),
+       '/Whistlecta_webview': (context) => MyWebViewForWhistlefeed(),
      },
      title: 'Flutter Demo',
      debugShowCheckedModeBanner: false,

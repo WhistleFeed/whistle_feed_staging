@@ -2,37 +2,41 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whistle_feed_staging/whistlefeed_provider.dart';
 
 
 class MyWebViewForWhistlefeed extends StatefulWidget {
   String rooturlforWebview="";
 
-  MyWebViewForWhistlefeed(this.rooturlforWebview);
+
   @override
-  _MyWebViewForBuddyClubState createState() => _MyWebViewForBuddyClubState(this.rooturlforWebview);
+  _MyWebViewForBuddyClubState createState() => _MyWebViewForBuddyClubState();
   static String routeName = "/myWebViewforbuddyloan";
 }
 
 class _MyWebViewForBuddyClubState extends State<MyWebViewForWhistlefeed> {
-  String urlWebview="";
-  _MyWebViewForBuddyClubState(this.urlWebview);
+  String rooturlforWebview="";
+
 
   bool isPageLoading = true;
   bool isToShowBackButton=false;
 
   int progressBar = 0;
-  String rootUrl="";
+
 
   bool delayToAvoidGlitch = true;
   bool pacmanResult = false;
 
   @override
   void initState() {
-    super.initState();
-    Timer(Duration(milliseconds: 200), () {
+
+    Timer(Duration(seconds: 2), () {
       setState(() {
+        print(rooturlforWebview+"gbvjdfbvjds");
         delayToAvoidGlitch = false;
-        rootUrl = ModalRoute
+        rooturlforWebview   = ModalRoute
             .of(context)
             .settings
             .arguments;
@@ -42,6 +46,8 @@ class _MyWebViewForBuddyClubState extends State<MyWebViewForWhistlefeed> {
 
     }
     );
+    super.initState();
+
   }
   @override
   void dispose() {
@@ -56,9 +62,14 @@ class _MyWebViewForBuddyClubState extends State<MyWebViewForWhistlefeed> {
   @override
   Widget build(BuildContext context) {
 
-    print("my webview url is $rootUrl $isToShowBackButton");
+    print("my webview url is $rooturlforWebview $isToShowBackButton");
+    rooturlforWebview=Provider.of<Whistle_Provider>(context,listen:true).webviewurl;
 
-    return Scaffold(
+    return rooturlforWebview==""?Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    ):Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.0), // here the desired height
@@ -72,23 +83,31 @@ class _MyWebViewForBuddyClubState extends State<MyWebViewForWhistlefeed> {
             title: Container(
               padding: EdgeInsets.only(right: 40),
               child: Center(
-                child: Text('Whistle Feed')
+                  child: Text('Whistle Feed')
               ),
             )
         ),
       ),
 
       body: delayToAvoidGlitch ? Container() : InAppWebView(
-        initialUrl: rootUrl,
+        initialUrl: rooturlforWebview,
         initialHeaders: {},
         onLoadError: (controller,url,code,msg)async{
+          if (url.contains("market://details")) {
+            print("url contains market field "+url);
 
-          if(url.contains(rootUrl)) {
+            if (await canLaunch(url))
+              await launch(url);
+          }
+          if(url.contains(url)) {
             return;
           }
+
+
+
           if(Platform.isIOS)
           {
-            print("root url is for launch in browser $rootUrl");
+            print("root url is for launch in browser $rooturlforWebview");
           }
 
           print("launch url error");
@@ -103,31 +122,22 @@ class _MyWebViewForBuddyClubState extends State<MyWebViewForWhistlefeed> {
         },
         onLoadStart: (InAppWebViewController controller, String url) async {
           print("on load start $url");
-          if(url.contains("https://buddyjob.in/deep_link")
-              ||url.contains("https://buddyloan.in/deep_link")
-              ||url.contains("https://buddyloan.com/deep_link"))
-          {
-            final Uri uri=Uri.dataFromString(url);
-            Map<String, String> params = uri.queryParameters;
-            String routeName=params['sctl']!=null?params['sctl']:"";
-            if(routeName.isNotEmpty)
-            {
-              print("route name is $routeName");
 
-            }
-          }
           if (url.contains("market://details")) {
             print("url contains market field ");
+            if (await canLaunch(url))
+              await launch(url);
           }
 
-          if (url.contains("pacmangame")) {
-            return;
-
-          }
 
           isPageLoading = true;
         },
         onLoadStop: (InAppWebViewController controller, String url) async {
+          if (url.contains("market://details")) {
+            print("url contains market field ");
+            if (await canLaunch(url))
+              await launch(url);
+          }
           print("on load stop $url");
           isPageLoading = false;
         },

@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:whistle_feed_staging/utils.dart';
 import 'package:whistle_feed_staging/whistle_feed_model.dart';
-
 class Whistle_Provider extends ChangeNotifier {
   List<Campaindata> _campagainlist = [];
 
@@ -15,6 +14,7 @@ class Whistle_Provider extends ChangeNotifier {
   List<Campaindata> seconfpencil;
   List<Campaindata> thirdpencil;
   List<Campaindata> fourthpencil;
+  String webviewurl='';
 
 
 
@@ -42,15 +42,15 @@ class Whistle_Provider extends ChangeNotifier {
 
       print(whistleFeedModel.message);
       if(whistleFeedModel.message=="verified")
-        {
-          adShowListener.onAdShowStart();
+      {
+        adShowListener.onAdShowStart();
 
-        }
+      }
       else
-        {
-          adShowListener.onAdShowFailure(whistleFeedModel.message);
+      {
+        adShowListener.onAdShowFailure(whistleFeedModel.message);
 
-        }
+      }
       print(whistleFeedModel.data.campgainlist.length);
 
       _campagainlist = whistleFeedModel.data.campgainlist;
@@ -67,47 +67,47 @@ class Whistle_Provider extends ChangeNotifier {
       int divided = firstHalf-secondHalf;
 
       if(size==1)
-        {
+      {
 
-         firstpencillist.addAll(_campagainlist.sublist(0,_campagainlist.length));
+        firstpencillist.addAll(_campagainlist.sublist(0,_campagainlist.length));
 
-        }
-  else if(size==2)
-  {
-    firstpencillist.addAll(_campagainlist.sublist(0,firstHalf));
-    seconfpencil.addAll(_campagainlist.sublist(firstHalf,_campagainlist.length));
-  }
-     else if(size==3)
-        {
-          secondHalf=_campagainlist.length-firstHalf;
-          firstpencillist.addAll(_campagainlist.sublist(0,firstHalf));
-          seconfpencil.addAll(_campagainlist.sublist(firstHalf,(secondHalf)));
-          thirdpencil.addAll(_campagainlist.sublist(secondHalf,_campagainlist.length));
-          int chunks=(_campagainlist.length/size).toInt();
-          int howManyExtraHave=_campagainlist.length-(3*chunks);
-          print("extrra ${howManyExtraHave}");
+      }
+      else if(size==2)
+      {
+        firstpencillist.addAll(_campagainlist.sublist(0,firstHalf));
+        seconfpencil.addAll(_campagainlist.sublist(firstHalf,_campagainlist.length));
+      }
+      else if(size==3)
+      {
+        secondHalf=_campagainlist.length-firstHalf;
+        firstpencillist.addAll(_campagainlist.sublist(0,firstHalf));
+        seconfpencil.addAll(_campagainlist.sublist(firstHalf,(secondHalf)));
+        thirdpencil.addAll(_campagainlist.sublist(secondHalf,_campagainlist.length));
+        int chunks=(_campagainlist.length/size).toInt();
+        int howManyExtraHave=_campagainlist.length-(3*chunks);
+        print("extrra ${howManyExtraHave}");
 
 
-        }
-     else if(size==4) {
-      secondHalf=firstHalf+firstHalf;
-      thirdHalf=secondHalf+firstHalf;
-     int fourthHalf=thirdHalf+firstHalf;
-      int chunks=(_campagainlist.length/size).toInt();
-      int howManyExtra=_campagainlist.length-(4*chunks);
-      print("print remaining ${howManyExtra}");
+      }
+      else if(size==4) {
+        secondHalf=firstHalf+firstHalf;
+        thirdHalf=secondHalf+firstHalf;
+        int fourthHalf=thirdHalf+firstHalf;
+        int chunks=(_campagainlist.length/size).toInt();
+        int howManyExtra=_campagainlist.length-(4*chunks);
+        print("print remaining ${howManyExtra}");
 
-      firstpencillist.addAll(_campagainlist.sublist(0,firstHalf));
-      seconfpencil.addAll(_campagainlist.sublist(firstHalf,secondHalf));
-      thirdpencil.addAll(_campagainlist.sublist(secondHalf,thirdHalf));
-      fourthpencil.addAll(_campagainlist.sublist(thirdHalf,fourthHalf));
+        firstpencillist.addAll(_campagainlist.sublist(0,firstHalf));
+        seconfpencil.addAll(_campagainlist.sublist(firstHalf,secondHalf));
+        thirdpencil.addAll(_campagainlist.sublist(secondHalf,thirdHalf));
+        fourthpencil.addAll(_campagainlist.sublist(thirdHalf,fourthHalf));
 
-      if(howManyExtra>0)
+        if(howManyExtra>0)
         {
           if(howManyExtra==1)
-            {
-              fourthpencil.addAll(_campagainlist.sublist(fourthHalf,fourthHalf+1));
-            }
+          {
+            fourthpencil.addAll(_campagainlist.sublist(fourthHalf,fourthHalf+1));
+          }
           else  if(howManyExtra==2)
           {
             thirdpencil.addAll(_campagainlist.sublist(fourthHalf,fourthHalf+1));
@@ -129,7 +129,7 @@ class Whistle_Provider extends ChangeNotifier {
 
 
 
-   }
+      }
 
 
     }
@@ -141,6 +141,12 @@ class Whistle_Provider extends ChangeNotifier {
   }
 
 
+  void changeurl(String url)
+  {
+    webviewurl=url;
+    print("inprovidervalueis changed "+webviewurl);
+    notifyListeners();
+  }
 
 
 }
