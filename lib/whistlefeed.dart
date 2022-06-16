@@ -1587,6 +1587,7 @@ class _MyHomePageState extends State<Whistle_feed> {
           height: 0,
         ):
         Container(
+          height: pensize==1?100:pensize==2?200:pensize==3?300:pensize==4?400:0,
           child: Column(
             children: [
               Align(
