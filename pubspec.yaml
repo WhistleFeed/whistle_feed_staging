@@ -1,5 +1,4 @@
 name: whistle_feed_staging
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 description: a staging plugin
 version: 0.0.1
 homepage: https://github.com/prakashvalueleaf/whistle_feed_staging
@@ -14,8 +13,7 @@ dependencies:
   provider: ^6.0.3
   http: ^0.12.0+2
   device_info: ^0.4.2+4
-  flutter_inappwebview: 4.0.0+4
-
+  flutter_inappwebview: ^4.0.0
 
 dev_dependencies:
   flutter_test:

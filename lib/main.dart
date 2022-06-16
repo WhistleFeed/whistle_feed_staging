@@ -6,23 +6,30 @@ import 'whistlefeed.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 
+class ShowWhistleAdds extends StatefulWidget {
+  String publishetoken="";
+  int pencilzize=1;
+  bool testmoade=false;
+  MyAdShowListener adShowListener=MyAdShowListener();
+  ShowWhistleAdds(this.publishetoken,this.pencilzize,this.testmoade,this.adShowListener);
 
-void main() {
-  runApp( MyApp());
+  _myappstate createState()=> _myappstate(this.publishetoken,this.pencilzize,this.testmoade,this.adShowListener);
 }
-
-class MyApp extends StatefulWidget {
-  _myappstate createState()=> _myappstate();
-}
-class _myappstate extends State<MyApp>
+class _myappstate extends State<ShowWhistleAdds>
 {
+  String publishetoken='';
+  int pencilsize;
+  MyAdShowListener adShowListener=MyAdShowListener();
+  bool testmode=false;
+
+
+  _myappstate(this.publishetoken,this.pencilsize,this.testmode,this.adShowListener);
 
   @override
   void initState() {
     super.initState();
   }
 
-  MyAdShowListener adShowListener=MyAdShowListener();
   @override
   Widget build(BuildContext context) {
    return ChangeNotifierProvider(
@@ -36,7 +43,7 @@ class _myappstate extends State<MyApp>
      theme: ThemeData(
        primarySwatch: Colors.blue,
      ),
-     home:Whistle_feed('116378385233oOAaL_4',4,false,adShowListener),
+     home:Whistle_feed(publishetoken,pencilsize,false,adShowListener),
    ),
    );
   }
