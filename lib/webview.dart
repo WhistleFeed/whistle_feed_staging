@@ -65,11 +65,7 @@ class _MyWebViewForBuddyClubState extends State<MyWebViewForWhistlefeed> {
     print("my webview url is $rooturlforWebview $isToShowBackButton");
     rooturlforWebview=Provider.of<Whistle_Provider>(context,listen:true).webviewurl;
 
-    return rooturlforWebview==""?Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    ):Scaffold(
+    return Scaffold(
       key: _scaffoldKey,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.0), // here the desired height

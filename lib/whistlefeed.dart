@@ -1633,7 +1633,6 @@ class _MyHomePageState extends State<Whistle_feed> {
         Container(
           child: Column(
             children: [
-              SizedBox(height: 100,),
               Align(
                 alignment: Alignment.topRight,
                 child: Padding(padding: const EdgeInsets.only(right: 25,top: 10),
