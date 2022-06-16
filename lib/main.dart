@@ -27,7 +27,7 @@ class _myappstate extends State<MyApp>
   Widget build(BuildContext context) {
    return ChangeNotifierProvider(
      create: (context)=> Whistle_Provider(),
-   child: MaterialApp(
+   child: MaterialApp (
      routes: {
        '/Whistlecta_webview': (context) => MyWebViewForWhistlefeed(""),
      },
