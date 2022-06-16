@@ -2,7 +2,7 @@ name: whistle_feed_staging
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 description: a staging plugin
 version: 0.0.1
-homepage:
+homepage: https://github.com/prakashvalueleaf/whistle_feed_staging
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
