@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whistle_feed_staging/whistlefeed_provider.dart';
 
-
 class MyWebViewForWhistlefeed extends StatefulWidget {
   String rooturlforWebview="";
 
