@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 import 'package:whistle_feed_staging/utils.dart';
 import 'package:whistle_feed_staging/whistle_feed_model.dart';
 import 'package:whistle_feed_staging/whistlefeed_provider.dart';
 
 import 'adshowlistener.dart';
-
-class Whistle_feed extends StatefulWidget {
+class Whistle_feed extends StatefulWidget  {
   String ptoken='';
   int pensize=1;
   bool testMode=false;
@@ -23,17 +24,19 @@ class Whistle_feed extends StatefulWidget {
 
 }
 
-class _MyHomePageState extends State<Whistle_feed> {
+class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
   int firstPenciletimer=10;
   int secondpenciltimer=0;
   int thirdpenciltimer=0;
   int fourthpenciltimer=0;
-
+  String packageName='';
   String webviewurl="";
+
+
+  bool appispaused=false;
 
   String ptoken;
   int pensize=1;
-  //PackageInfo packageInfo;
 
   _MyHomePageState(this.ptoken,this.pensize);
 
@@ -41,7 +44,7 @@ class _MyHomePageState extends State<Whistle_feed> {
 
   int rotationtime=3;
   double opacity = 1.0;
-
+  int counter=0;
 
   int indexvalue1=0;
   int indexvalue2=0;
@@ -65,6 +68,10 @@ class _MyHomePageState extends State<Whistle_feed> {
 
   String platform="";
 
+  _launchURL(String url) async {
+    await launch(url);
+  }
+
 
   ///////normal///
 /*  double squeeze=1.85;
@@ -80,24 +87,50 @@ class _MyHomePageState extends State<Whistle_feed> {
     thirdpenciltimer =firstPenciletimer+4;
     fourthpenciltimer =firstPenciletimer+6;
     startController();
-
+    WidgetsBinding.instance.addObserver(this);
     checkdevice();
+    getPackage();
 
     Provider.of<Whistle_Provider>(context, listen: false).get_whistle_Feed_Adds("${ptoken}",pensize,platform);
 
     super.initState();
   }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.paused) {
 
+      setState(() {
+
+
+
+
+
+
+      });
+
+      print('app is paused');
+    }
+    else if (state == AppLifecycleState.resumed) {
+      setState(() {
+
+
+
+
+
+      });
+      print('app is came back');
+
+    }
+
+  }
   @override
   void dispose() {
     print("dispose was called");
-    _controller.dispose();
-    _controller1.dispose();
-    _controller2.dispose();
-    _controller3.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+
     super.dispose();
   }
-
 
   void checkdevice()
   {
@@ -114,9 +147,10 @@ class _MyHomePageState extends State<Whistle_feed> {
   }
 
   void getPackage() async {
-    //packageInfo = await PackageInfo.fromPlatform();
-    // String packageName = packageInfo.packageName;
-    //  print('printpackagename${packageName}');
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    packageInfo = await PackageInfo.fromPlatform();
+    packageName = packageInfo.packageName;
+    print('printpackagename${packageName}');
 
   }
 
@@ -128,7 +162,7 @@ class _MyHomePageState extends State<Whistle_feed> {
 
   void startController() async {
     int totalitems = 4; //total length of items
-    int counter = 1;
+    counter = 1;
     if (counter <= totalitems) {
       upperSliderTimer = Timer.periodic(Duration(seconds: firstPenciletimer), (timer) {
 
@@ -209,26 +243,11 @@ class _MyHomePageState extends State<Whistle_feed> {
                     counter++;
 
                   });
-
                 }
-
-
-
-
-
               });
-
             }
-
-
-
           });
-
-
-
         }
-
-
       });
     }
   }
@@ -326,17 +345,18 @@ class _MyHomePageState extends State<Whistle_feed> {
                     print("get index of click  ${firstPencil[indexvalue1].brandname}");
 
                     setState(() {
-                      webviewurl="${firstPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=com.buddyloan.vls";
+                      webviewurl="${firstPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=$packageName";
 
 
                       print(webviewurl);
                       if(webviewurl!="")
                       {
-                        print('urlisnotemptyy');
+                        _launchURL(webviewurl);
+                        /* print('urlisnotemptyy');
                         print(webviewurl);
                         Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
 
-                        Navigator.pushNamed(context, '/Whistlecta_webview');
+                        Navigator.pushNamed(context, '/Whistlecta_webview');*/
 
                       }
 
@@ -490,17 +510,19 @@ class _MyHomePageState extends State<Whistle_feed> {
                   print("get index of click  ${firstPencil[indexvalue1].brandname}");
 
                   setState(() {
-                    webviewurl="${firstPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=com.buddyloan.vls";
+                    webviewurl="${firstPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=$packageName";
 
 
                     print(webviewurl);
                     if(webviewurl!="")
                     {
-                      print('urlisnotemptyy');
+                      _launchURL(webviewurl);
+
+                      /*  print('urlisnotemptyy');
                       print(webviewurl);
                       Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
 
-                      Navigator.pushNamed(context, '/Whistlecta_webview');
+                      Navigator.pushNamed(context, '/Whistlecta_webview');*/
 
                     }
 
@@ -644,17 +666,18 @@ class _MyHomePageState extends State<Whistle_feed> {
                 onTap: (){
                   setState(() {
                     print('checkclickingindex${secondPencil[indexvalue2].brandname}');
-                    webviewurl="${secondPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=com.buddyloan.vls";
+                    webviewurl="${secondPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=$packageName";
 
 
                     print(webviewurl);
                     if(webviewurl!="")
                     {
-                      print('urlisnotemptyy');
+                      _launchURL(webviewurl);
+                      /* print('urlisnotemptyy');
                       print(webviewurl);
                       Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
 
-                      Navigator.pushNamed(context, '/Whistlecta_webview');
+                      Navigator.pushNamed(context, '/Whistlecta_webview');*/
 
                     }
 
@@ -780,11 +803,13 @@ class _MyHomePageState extends State<Whistle_feed> {
                     print(webviewurl);
                     if(webviewurl!="")
                     {
-                      print('urlisnotemptyy');
-                      print(webviewurl);
-                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+                      _launchURL(webviewurl);
 
-                      Navigator.pushNamed(context, '/Whistlecta_webview');
+                      /*print('urlisnotemptyy');
+                        print(webviewurl);
+                        Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                        Navigator.pushNamed(context, '/Whistlecta_webview');*/
 
                     }
 
@@ -935,11 +960,13 @@ class _MyHomePageState extends State<Whistle_feed> {
                     print(webviewurl);
                     if(webviewurl!="")
                     {
-                      print('urlisnotemptyy');
-                      print(webviewurl);
-                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+                      _launchURL(webviewurl);
 
-                      Navigator.pushNamed(context, '/Whistlecta_webview');
+                      /* print('urlisnotemptyy');
+                        print(webviewurl);
+                        Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                        Navigator.pushNamed(context, '/Whistlecta_webview');*/
 
                     }
 
@@ -1054,11 +1081,13 @@ class _MyHomePageState extends State<Whistle_feed> {
                     print(webviewurl);
                     if(webviewurl!="")
                     {
-                      print('urlisnotemptyy');
-                      print(webviewurl);
-                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+                      _launchURL(webviewurl);
 
-                      Navigator.pushNamed(context, '/Whistlecta_webview');
+                      /*       print('urlisnotemptyy');
+                        print(webviewurl);
+                        Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                        Navigator.pushNamed(context, '/Whistlecta_webview');*/
 
                     }
 
@@ -1176,26 +1205,21 @@ class _MyHomePageState extends State<Whistle_feed> {
               EdgeInsets.only(left: 10, right: 5),
               child: GestureDetector(
                 onTap: (){
-
-
                   setState(() {
                     print("get index of click  ${firstPencil[indexvalue1].brandname}");
                     webviewurl="${firstPencil[indexvalue1].tracker}&token=${ptoken}&auth_url=com.buddyloan.vls";
-
-
                     print(webviewurl);
                     if(webviewurl!="")
                     {
-                      print('urlisnotemptyy');
-                      print(webviewurl);
-                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+                      _launchURL(webviewurl);
 
-                      Navigator.pushNamed(context, '/Whistlecta_webview');
+                      /*print('urlisnotemptyy');
+                          print(webviewurl);
+                          Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                          Navigator.pushNamed(context, '/Whistlecta_webview');*/
 
                     }
-
-
-
 
                   });
                 },
@@ -1341,12 +1365,14 @@ class _MyHomePageState extends State<Whistle_feed> {
 
                     if(webviewurl!="")
                     {
-                      print('urlisnotemptyy');
-                      print(webviewurl);
-                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+                      _launchURL(webviewurl);
 
-                      Navigator.pushNamed(context, '/Whistlecta_webview');
+                      /*  print('urlisnotemptyy');
+                        print(webviewurl);
+                        Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
 
+                        Navigator.pushNamed(context, '/Whistlecta_webview');
+*/
                     }
 
                   });
@@ -1458,11 +1484,13 @@ class _MyHomePageState extends State<Whistle_feed> {
 
                     if(webviewurl!="")
                     {
-                      print('urlisnotemptyy');
-                      print(webviewurl);
-                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+                      _launchURL(webviewurl);
 
-                      Navigator.pushNamed(context, '/Whistlecta_webview');
+                      /* print('urlisnotemptyy');
+                        print(webviewurl);
+                        Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                        Navigator.pushNamed(context, '/Whistlecta_webview');*/
 
                     }
 
@@ -1579,11 +1607,13 @@ class _MyHomePageState extends State<Whistle_feed> {
 
                     if(webviewurl!="")
                     {
-                      print('urlisnotemptyy');
-                      print(webviewurl);
-                      Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+                      _launchURL(webviewurl);
 
-                      Navigator.pushNamed(context, '/Whistlecta_webview');
+                      /*       print('urlisnotemptyy');
+                        print(webviewurl);
+                        Provider.of<Whistle_Provider>(context, listen: false).changeurl(webviewurl);
+
+                        Navigator.pushNamed(context, '/Whistlecta_webview');*/
 
                     }
                   });
@@ -1697,45 +1727,44 @@ class _MyHomePageState extends State<Whistle_feed> {
     whistleFeedModel =Provider.of<Whistle_Provider>(context, listen: true).whistleFeedModel;
 
 
-    return Scaffold(
-
-        body: whistleFeedModel==null?Container(
+    return  whistleFeedModel==null?Container(
           height: 0,
         ):
-        Container(
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Padding(padding: const EdgeInsets.only(right: 25,top: 10),
-                  child: RichText(
-                    text: TextSpan(
-                      text: 'Whistle  ',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontStyle: FontStyle.italic
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: 'Feed | ',
-                            style: TextStyle(
-                                fontStyle: FontStyle.normal
-                            )
-
-                        ),
-                        TextSpan(text: 'Sponsored',
-                            style: TextStyle(
-                                fontStyle: FontStyle.normal
-                            )
-                        ),
-                      ],
-                    ),
+    Container(
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(padding: const EdgeInsets.only(right: 25,top: 10),
+              child: RichText(
+                text: TextSpan(
+                  text: 'Whistle  ',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontStyle: FontStyle.italic
                   ),
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'Feed | ',
+                        style: TextStyle(
+                            fontStyle: FontStyle.normal
+                        )
+
+                    ),
+                    TextSpan(text: 'Sponsored',
+                        style: TextStyle(
+                            fontStyle: FontStyle.normal
+                        )
+                    ),
+                  ],
                 ),
               ),
-              pencils()
-            ],
+            ),
           ),
-        ));
+          pencils()
+        ],
+      ),
+    );
+
   }
 }

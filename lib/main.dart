@@ -34,17 +34,7 @@ class _myappstate extends State<ShowWhistleAdds>
   Widget build(BuildContext context) {
    return ChangeNotifierProvider(
      create: (context)=> Whistle_Provider(),
-   child: MaterialApp (
-     routes: {
-       '/Whistlecta_webview': (context) => MyWebViewForWhistlefeed(),
-     },
-     title: 'Flutter Demo',
-     debugShowCheckedModeBanner: false,
-     theme: ThemeData(
-       primarySwatch: Colors.blue,
-     ),
-     home:Whistle_feed(publishetoken,pencilsize,false,adShowListener),
-   ),
+   child: Whistle_feed(publishetoken,pencilsize,false,adShowListener)
    );
   }
 
