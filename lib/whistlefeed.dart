@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:package_info/package_info.dart';
 import 'package:whistle_feed_staging/utils.dart';
 import 'package:whistle_feed_staging/whistle_feed_model.dart';
 import 'package:whistle_feed_staging/whistlefeed_provider.dart';
@@ -25,7 +26,7 @@ class Whistle_feed extends StatefulWidget  {
 }
 
 class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
-  int firstPenciletimer=10;
+  int firstPenciletimer=30;
   int secondpenciltimer=0;
   int thirdpenciltimer=0;
   int fourthpenciltimer=0;
@@ -1727,44 +1728,45 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
     whistleFeedModel =Provider.of<Whistle_Provider>(context, listen: true).whistleFeedModel;
 
 
-    return  whistleFeedModel==null?Container(
+    return Scaffold(
+
+        body: whistleFeedModel==null?Container(
           height: 0,
         ):
-    Container(
-      child: Column(
-        children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(padding: const EdgeInsets.only(right: 25,top: 10),
-              child: RichText(
-                text: TextSpan(
-                  text: 'Whistle  ',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontStyle: FontStyle.italic
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: 'Feed | ',
-                        style: TextStyle(
-                            fontStyle: FontStyle.normal
-                        )
+        Container(
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(padding: const EdgeInsets.only(right: 25,top: 10),
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Whistle  ',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: 'Feed | ',
+                            style: TextStyle(
+                                fontStyle: FontStyle.normal
+                            )
 
+                        ),
+                        TextSpan(text: 'Sponsored',
+                            style: TextStyle(
+                                fontStyle: FontStyle.normal
+                            )
+                        ),
+                      ],
                     ),
-                    TextSpan(text: 'Sponsored',
-                        style: TextStyle(
-                            fontStyle: FontStyle.normal
-                        )
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+              pencils()
+            ],
           ),
-          pencils()
-        ],
-      ),
-    );
-
+        ));
   }
 }
