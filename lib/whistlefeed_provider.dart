@@ -14,7 +14,8 @@ class Whistle_Provider extends ChangeNotifier {
   List<Campaindata> thirdpencil;
   List<Campaindata> fourthpencil;
 
-  Future<WhistleFeedModel> get_whistle_Feed_Adds(String publisher_token, int size,String platform) async {
+  Future<WhistleFeedModel> get_whistle_Feed_Adds(String publisher_token, int size,String platform,String packagename) async {
+
     var headers = {
       'Content-Type': 'text/plain',
       'Cookie': 'ci_session=ept5brqr1v9smenbgkptqu19vkggme9m'
@@ -23,8 +24,9 @@ class Whistle_Provider extends ChangeNotifier {
         Uri.parse(
             'https://feed-api.whistle.mobi/Display_ads_api/displayAdsApi'));
     request.body =
-    '''{"os_name":"${platform}","publisher_token":"$publisher_token","api_called":1,"size":$size,"parentUrl":"https://www.buddyloan.com/"}''';
+    '''{"os_name":"${platform}","publisher_token":"$publisher_token","api_called":1,"size":$size,"parentUrl":"$packagename"}''';
     request.headers.addAll(headers);
+    print(request.body);
 
     http.StreamedResponse streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
@@ -42,23 +44,32 @@ class Whistle_Provider extends ChangeNotifier {
 
         if(adShowListener==null)
           {
-
             print('Your adding Listener as a Null');
-
-
           }
         else if(publisher_token=='')
           {
             print('Please Add your Publisher Token');
           }
         else{
-          adShowListener.onAdShowStart();
+          if(size>4)
+            {
+              print('Adds Range form 1 to 4');
+            }
+          else
+            {
+              adShowListener.onAdShowStart();
+
+            }
         }
 
       }
       else
       {
-        adShowListener.onAdShowFailure(whistleFeedModel.message);
+
+        if(whistleFeedModel.message=='user not found')
+          {
+            print('Add your Publisher Token');
+          }
 
       }
       print(whistleFeedModel.data.campgainlist.length);
@@ -140,6 +151,10 @@ class Whistle_Provider extends ChangeNotifier {
 
 
       }
+      else
+      {
+          firstpencillist.addAll(_campagainlist.sublist(0,_campagainlist.length));
+        }
 
 
     }
