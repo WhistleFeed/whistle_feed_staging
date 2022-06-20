@@ -1,18 +1,16 @@
-
 import 'adshowlistener.dart';
 
 class MyAdShowListener implements AdShowListener
   {
   @override
   String onAdShowClick() {
-    // TODO: implement onAdShowClick
-   print("df");
+   print("On Adds Click");
   }
 
   @override
   String onAdShowComplete() {
-    // TODO: implement onAdShowComplete
-    print("df");
+
+    print("On Adds complete");
   }
 
   @override

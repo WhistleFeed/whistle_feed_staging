@@ -2,18 +2,17 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info/package_info.dart';
 import 'package:whistle_feed_staging/utils.dart';
 import 'package:whistle_feed_staging/whistle_feed_model.dart';
 import 'package:whistle_feed_staging/whistlefeed_provider.dart';
-
 import 'adshowlistener.dart';
+
 class Whistle_feed extends StatefulWidget  {
   String ptoken='';
-  int pensize=1;
+  int pensize=1; /////pencil size is required/////
   bool testMode=false;
   AdShowListener _adsShowListener;
   Whistle_feed(this.ptoken,this.pensize,this.testMode,this._adsShowListener){
@@ -24,7 +23,6 @@ class Whistle_feed extends StatefulWidget  {
   _MyHomePageState createState() => _MyHomePageState(this.ptoken,this.pensize);
 
 }
-
 class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
   int firstPenciletimer=30;
   int secondpenciltimer=0;
@@ -32,62 +30,45 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
   int fourthpenciltimer=0;
   String packageName='';
   String webviewurl="";
-
-
   bool appispaused=false;
-
   String ptoken;
   int pensize=1;
-
   _MyHomePageState(this.ptoken,this.pensize);
-
   WhistleFeedModel  whistleFeedModel;
-
   int rotationtime=3;
   double opacity = 1.0;
   int counter=0;
-
   int indexvalue1=0;
   int indexvalue2=0;
   int indexvalue3=0;
   int indexvalue4=0;
-
   bool firstpencilvisible=true;
   bool secondpencilvisible=true;
   bool thirdpencilvisible=true;
   bool fourthpencilvisible=true;
-
   int animationMiliseconds=1200;
-
+  int totalitems;
   //////////cubes attribute /////////
   double squeeze=1.6;
   double diameter=0.5;
   double perspective=0.00025;
   double itemextent=76;
-
-  //////////////////////////////////
-
   String platform="";
 
   _launchURL(String url) async {
     await launch(url);
   }
-
-
-  ///////normal///
-/*  double squeeze=1.85;
-  double diameter=0.51;
-  double perspective=0.00002;
-  double itemextent=76;*/
-
-
-
   @override
   void initState() {
     secondpenciltimer =firstPenciletimer+2;
     thirdpenciltimer =firstPenciletimer+4;
     fourthpenciltimer =firstPenciletimer+6;
-    startController();
+
+    setState(() {
+      startController();
+    });
+
+
     WidgetsBinding.instance.addObserver(this);
     checkdevice();
     getPackage();
@@ -96,35 +77,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
 
     super.initState();
   }
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.paused) {
 
-      setState(() {
-
-
-
-
-
-
-      });
-
-      print('app is paused');
-    }
-    else if (state == AppLifecycleState.resumed) {
-      setState(() {
-
-
-
-
-
-      });
-      print('app is came back');
-
-    }
-
-  }
   @override
   void dispose() {
     print("dispose was called");
@@ -162,10 +115,11 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
   Timer upperSliderTimer;
 
   void startController() async {
-    int totalitems = 4; //total length of items
+    totalitems = 4; //total length of items
     counter = 1;
+    print('appstatus ${appispaused}');
     if (counter <= totalitems) {
-      upperSliderTimer = Timer.periodic(Duration(seconds: firstPenciletimer), (timer) {
+      upperSliderTimer = Timer.periodic(Duration(seconds: 30), (timer) {
 
 
         setState(() {
@@ -253,6 +207,112 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
     }
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.paused) {
+      setState(() {
+        upperSliderTimer.cancel();
+      });
+
+      print('app is paused');
+    }
+    else if (state == AppLifecycleState.resumed) {
+      setState(() {
+        if (counter <= totalitems) {
+          upperSliderTimer = Timer.periodic(Duration(seconds: firstPenciletimer), (timer) {
+            setState(() {
+              firstpencilvisible=false;
+            });
+            Timer(Duration(milliseconds: animationMiliseconds),(){
+              setState(() {
+                firstpencilvisible=true;
+              });
+            });
+            _controller.animateToItem(counter, duration: Duration(milliseconds: animationMiliseconds), curve: Curves.easeInCubic);
+
+            _controller.addListener(() {
+
+            });
+
+            if(_controller.animateToItem(counter, duration: Duration(milliseconds: animationMiliseconds), curve: Curves.easeInCubic) != null)
+            {
+              print('one is rotating');
+              Timer(Duration(milliseconds: animationMiliseconds),(){
+                setState(() {
+                  secondpencilvisible=false;
+                });
+              });
+
+              Timer(Duration(milliseconds: 1800),(){
+
+                _controller1.animateToItem(counter, duration: Duration(milliseconds: animationMiliseconds), curve: Curves.easeInCubic);
+
+                setState(() {
+                  Timer(Duration(milliseconds: animationMiliseconds),(){
+                    setState(() {
+                      secondpencilvisible=true;
+                    });
+                  });
+                });
+
+                if(_controller1.animateToItem(counter, duration: Duration(milliseconds: animationMiliseconds), curve: Curves.easeInCubic) != null)
+                {
+                  Timer(Duration(milliseconds: animationMiliseconds),(){
+                    setState(() {
+                      thirdpencilvisible=false;
+                    });
+                  });
+                  Timer(Duration(milliseconds: 1800),(){
+
+
+                    _controller2.animateToItem(counter, duration: Duration(milliseconds: animationMiliseconds), curve: Curves.easeInCubic);
+                    setState(() {
+                      Timer(Duration(milliseconds: animationMiliseconds),(){
+                        setState(() {
+                          thirdpencilvisible=true;
+                        });
+                      });
+                    });
+
+
+                    if(_controller2.animateToItem(counter, duration: Duration(milliseconds: animationMiliseconds), curve: Curves.easeInCubic) != null)
+                    {
+
+                      Timer(Duration(milliseconds: animationMiliseconds),(){
+                        setState(() {
+                          fourthpencilvisible=false;
+                        });
+                      });
+                      Timer(Duration(milliseconds: 1800),(){
+
+                        _controller3.animateToItem(counter, duration: Duration(milliseconds: animationMiliseconds), curve: Curves.easeInCubic);
+                        setState(() {
+                          Timer(Duration(milliseconds: animationMiliseconds),(){
+                            setState(() {
+                              fourthpencilvisible=true;
+                            });
+                          });
+                        });
+                        counter++;
+
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+
+
+
+      });
+      print('app is came back');
+
+    }
+
+  }
   Future get_impressions(String aliasid) async
   {
     var request = http.Request('POST', Uri.parse('https://hooks.feed.whistle.mobi/i?alias=34&token=${ptoken}&flag=0&auth_url=https://www.buddyloan.com/blog/a-detailed-guide-to-get-a-good-credit-score/'));
@@ -298,29 +358,6 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
     Color(0xFF655B4E),
     Color(0xFF05716C)
   ];
-
-
-/*  List <Color> globalcolors=[
-    Color(0xFFD72631),
-    Color(0xFFE75974),
-    Color(0xFF26495C),
-    Color(0xFFE3B448),
-    Color(0xFF077B8A),
-    Color(0xFFBE1558),
-    Color(0xFFC4A35A),
-    Color(0xFF95BB6F),
-    Color(0xFF66A995),
-    Color(0xFF8E6C6B),
-    Color(0xFFC66B3D),
-    Color(0xFF3A6B35),
-    Color(0xFF5C3C92),
-    Color(0xFF322514),
-    Color(0xFF655B4E),
-    Color(0xFF05716C)
-
-  ];*/
-
-
 
   Widget pencils()
   {
@@ -1726,6 +1763,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
   Widget build(BuildContext context) {
 
     whistleFeedModel =Provider.of<Whistle_Provider>(context, listen: true).whistleFeedModel;
+
 
 
     return Scaffold(
