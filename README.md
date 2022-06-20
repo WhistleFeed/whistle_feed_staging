@@ -12,8 +12,10 @@ some third-party plugins are used
 This Dart package will utilize the plugin, **whistle_feed_staging**, so to quickly and easily implement ads into a Flutter app.
 
  # Sign Up and Get Your Publisher token here
+ [!website link](https://publisher.whistle.mobi/)
+
  Note:- Without Any publisher token you will not get any Whistle Adds.
- https://publisher.whistle.mobi/
+
 
  #initilize the plugin of latest version
  And so, for this version, add this to your package's pubspec.yaml file instead:
@@ -21,7 +23,9 @@ This Dart package will utilize the plugin, **whistle_feed_staging**, so to quick
 
 #Adds Showing Error
 1) You are not given the publisher token,
-2) passing addlistener as null,
+2) passing addlistener as null,\
+3) Minimum pencil size is 1
+4) Maximum pencil size is 4
 
 #pixelerrors
 Note: The adds initilization in UI starts with Container widget with height.
@@ -33,47 +37,37 @@ Note :-  1) The below containeer heights is miniumum.
 required fields from developer : publisher token and pencil size (minimum size is 1 and maximum size is 4)
 
 
-case 1: if developer want 1 cube Ui initialization will be
+#case 1 : if you want 1 cube Ui initialization will be
 Container(
   height: 110,
-   child: ShowWhistleAdds('116378385233oOAaL_4',1,false,adShowListener),
+   child: ShowWhistleAdds('---publisher_token---',---pencil-size---,false,adShowListener),
 )
 ![1 cube adds]()
 
 
-case 2: if developer want 2 cubes Ui initialization will be
+#case 2: if you want 2 cubes Ui initialization will be
 Container(
   height: 220,
-   child: ShowWhistleAdds('116378385233oOAaL_4',2,false,adShowListener),
+   child: ShowWhistleAdds('---publisher_token---',---pencil-size---,false,adShowListener),
 )
-![1 cube adds](https://user-images.githubusercontent.com/32497443/60682408-e652af80-9e58-11e9-9c7a-259b0b0c6577.jpg)
+![2 cube adds]()
 
-case 3: if developer want 3 cubes Ui initialization will be
+#case 3: if you want 3 cubes Ui initialization will be
 Container(
 height: 330,
-child: ShowWhistleAdds('116378385233oOAaL_4',3,false,adShowListener),
-)
-![1 cube adds](https://user-images.githubusercontent.com/32497443/60682408-e652af80-9e58-11e9-9c7a-259b0b0c6577.jpg)
+child: ShowWhistleAdds('---publisher_token---',---pencil-size---,false,adShowListener),)
+![3 cube adds]()
 
 
-case 4: if developer want 3 cubes Ui initialization will be
+#case 4: if you want 4 cubes Ui initialization will be
 Container(
 height: 440,
-child: ShowWhistleAdds('116378385233oOAaL_4',4,false,adShowListener),
+child: ShowWhistleAdds('---publisher_token---',---pencil-size---,false,adShowListener),
 )
-![1 cube adds](https://user-images.githubusercontent.com/32497443/60682408-e652af80-9e58-11e9-9c7a-259b0b0c6577.jpg)
+![4 cube adds]()
 
-
-
-
-
-
-
-
-
-
-
-
+#Github repository for reference
+![github](https://github.com/prakashvalueleaf/whistle_feed_staging)
 
 
 
