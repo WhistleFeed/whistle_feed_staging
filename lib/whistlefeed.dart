@@ -441,7 +441,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                             child: Column(
                               children: [
                                 Container(
-                                  height: 60,
+                                  height: 59,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(Radius.circular(3)),
                                       color: firstpencilcolor[index]
@@ -463,7 +463,9 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                                                       alignment: WrapAlignment.spaceBetween,
                                                       direction: Axis.horizontal,
                                                       children: [
-                                                        Text(firstPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                        Padding(padding: EdgeInsets.only(left: 5,right: 5),
+                                                        child: Text(firstPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                        )
 
                                                       ],
                                                     ),
@@ -607,7 +609,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                           child: Column(
                             children: [
                               Container(
-                                height: 60,
+                                height: 59,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(3)),
                                     color: firstpencilcolor[index]
@@ -629,8 +631,9 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                                                     alignment: WrapAlignment.spaceBetween,
                                                     direction: Axis.horizontal,
                                                     children: [
-                                                      Text(firstPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
-
+                                                      Padding(padding: EdgeInsets.only(left: 5,right: 5),
+                                                        child: Text(firstPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
@@ -745,7 +748,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                         child: Column(
                           children: [
                             Container(
-                              height: 60,
+                              height: 59,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(Radius.circular(3)),
                                   color: secondpencilcolor[index]
@@ -763,8 +766,9 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                                               alignment: WrapAlignment.spaceBetween,
                                               direction: Axis.horizontal,
                                               children: [
-                                                Text(secondPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold),),
-                                              ],
+                                                Padding(padding: EdgeInsets.only(left: 5,right: 5),
+                                                  child: Text(secondPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                )                                              ],
                                             ),
                                           ),
                                         ),
@@ -895,7 +899,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                           child: Column(
                             children: [
                               Container(
-                                height: 60,
+                                height: 59,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(3)),
                                     color: firstpencilcolor[index]
@@ -917,8 +921,9 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                                                     alignment: WrapAlignment.spaceBetween,
                                                     direction: Axis.horizontal,
                                                     children: [
-                                                      Text(firstPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
-
+                                                      Padding(padding: EdgeInsets.only(left: 5,right: 5),
+                                                        child: Text(firstPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
@@ -1034,7 +1039,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                         child: Column(
                           children: [
                             Container(
-                              height: 60,
+                              height: 59,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(Radius.circular(3)),
                                   color: secondpencilcolor[index]
@@ -1052,8 +1057,9 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                                               alignment: WrapAlignment.spaceBetween,
                                               direction: Axis.horizontal,
                                               children: [
-                                                Text(secondPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold),),
-                                              ],
+                                                Padding(padding: EdgeInsets.only(left: 5,right: 5),
+                                                  child: Text(secondPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                )                                              ],
                                             ),
                                           ),
                                         ),
@@ -1157,7 +1163,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                             GestureDetector(
                               onTap: (){},
                               child:  Container(
-                                height: 60,
+                                height: 59,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(3)),
                                     color: thirdpencilcolor[index]
@@ -1175,8 +1181,9 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                                                 alignment: WrapAlignment.spaceBetween,
                                                 direction: Axis.horizontal,
                                                 children: [
-                                                  Text(thirdpencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold),),
-                                                ],
+                                                  Padding(padding: EdgeInsets.only(left: 5,right: 5),
+                                                    child: Text(thirdpencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                  )                                                ],
                                               ),
                                             ),
                                           ),
@@ -1302,7 +1309,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                           child: Column(
                             children: [
                               Container(
-                                height: 60,
+                                height: 59,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(3)),
                                     color: firstpencilcolor[index]
@@ -1324,8 +1331,9 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                                                     alignment: WrapAlignment.spaceBetween,
                                                     direction: Axis.horizontal,
                                                     children: [
-                                                      Text(firstPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
-
+                                                      Padding(padding: EdgeInsets.only(left: 5,right: 5),
+                                                        child: Text(firstPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
@@ -1439,7 +1447,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                         child: Column(
                           children: [
                             Container(
-                              height: 60,
+                              height: 59,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(Radius.circular(3)),
                                   color: secondpencilcolor[index]
@@ -1457,8 +1465,9 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                                               alignment: WrapAlignment.spaceBetween,
                                               direction: Axis.horizontal,
                                               children: [
-                                                Text(secondPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold),),
-                                              ],
+                                                Padding(padding: EdgeInsets.only(left: 5,right: 5),
+                                                  child: Text(secondPencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                )                                              ],
                                             ),
                                           ),
                                         ),
@@ -1561,7 +1570,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                             GestureDetector(
                               onTap: (){},
                               child:  Container(
-                                height: 60,
+                                height: 59,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(3)),
                                     color: thirdpencilcolor[index]
@@ -1579,8 +1588,9 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                                                 alignment: WrapAlignment.spaceBetween,
                                                 direction: Axis.horizontal,
                                                 children: [
-                                                  Text(thirdpencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold),),
-                                                ],
+                                                  Padding(padding: EdgeInsets.only(left: 5,right: 5),
+                                                    child: Text(thirdpencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                  )                                                ],
                                               ),
                                             ),
                                           ),
@@ -1681,7 +1691,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                             GestureDetector(
                               onTap: (){},
                               child:  Container(
-                                height: 60,
+                                height: 59,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.all(Radius.circular(3)),
                                     color: fourthpencilcolor[index]
@@ -1699,8 +1709,9 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
                                                 alignment: WrapAlignment.spaceBetween,
                                                 direction: Axis.horizontal,
                                                 children: [
-                                                  Text(fourthpencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold),),
-                                                ],
+                                                  Padding(padding: EdgeInsets.only(left: 5,right: 5),
+                                                    child: Text(fourthpencil[index].headline,style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold)),
+                                                  )                                                ],
                                               ),
                                             ),
                                           ),
@@ -1767,8 +1778,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
 
 
     return Scaffold(
-
-        body: whistleFeedModel==null?Container(
+        body: whistleFeedModel==null? Container(
           height: 0,
         ):
         Container(

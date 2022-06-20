@@ -33,7 +33,7 @@ class _myappstate extends State<ShowWhistleAdds>
   Widget build(BuildContext context) {
    return ChangeNotifierProvider(
      create: (context)=> Whistle_Provider(),
-   child: Whistle_feed(publishetoken,pencilsize,false,adShowListener)
+   child: Whistle_feed(publishetoken,pencilsize,false,null)
    );
   }
 

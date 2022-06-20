@@ -39,7 +39,21 @@ class Whistle_Provider extends ChangeNotifier {
       print(whistleFeedModel.message);
       if(whistleFeedModel.message=="verified")
       {
-        adShowListener.onAdShowStart();
+
+        if(adShowListener==null)
+          {
+
+            print('Your adding Listener as a Null');
+
+
+          }
+        else if(publisher_token=='')
+          {
+            print('Please Add your Publisher Token');
+          }
+        else{
+          adShowListener.onAdShowStart();
+        }
 
       }
       else
