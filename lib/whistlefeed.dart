@@ -71,7 +71,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
     checkdevice();
     getPackage();
 
-    Provider.of<Whistle_Provider>(context,listen: false).get_whistle_Feed_Adds("${ptoken}",pensize,platform,packageName);
+
 
 
     super.initState();
@@ -106,6 +106,8 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
     print('printpackagename${packageName}');
     if(packageName!='')
       {
+        Provider.of<Whistle_Provider>(context,listen: false).get_whistle_Feed_Adds("${ptoken}",pensize,platform,packageName);
+
         get_impressions("1",flag: "1");
       }
 
@@ -1784,7 +1786,7 @@ class _MyHomePageState extends State<Whistle_feed> with WidgetsBindingObserver{
     return Scaffold(
         body: whistleFeedModel==null?Container(
           height: 0,
-        ):ptoken==''?Container(height: 0,):
+        ):ptoken==""?Container(height: 0,):whistleFeedModel.message=='user not found'?Container(height: 0,):
         Container(
           child: Column(
             children: [

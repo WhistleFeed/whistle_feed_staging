@@ -15,16 +15,12 @@ class Whistle_Provider extends ChangeNotifier {
   List<Campaindata> fourthpencil;
 
   Future<WhistleFeedModel> get_whistle_Feed_Adds(String publisher_token, int size,String platform,String packagename) async {
-
     var headers = {
       'Content-Type': 'text/plain',
-      'Cookie': 'ci_session=ept5brqr1v9smenbgkptqu19vkggme9m'
+      'Cookie': 'ci_session=9r8fp0m4jm2b8m00qp7rj4js9mah6kua'
     };
-    var request = http.Request('POST',
-        Uri.parse(
-            'https://feed-api.whistle.mobi/Display_ads_api/displayAdsApi'));
-    request.body =
-    '''{"os_name":"${platform}","publisher_token":"$publisher_token","api_called":1,"size":$size,"parentUrl":"$packagename"}''';
+    var request = http.Request('POST', Uri.parse('https://feed-api.whistle.mobi/Display_ads_api/displayAdsApi'));
+    request.body = '''{"os_name":"$platform","publisher_token":"$publisher_token","api_called":1,"size":$size,"parentUrl":"com.buddyloan.vls"}''';
     request.headers.addAll(headers);
     print(request.body);
 
@@ -51,15 +47,8 @@ class Whistle_Provider extends ChangeNotifier {
             print('Please Add your Publisher Token');
           }
         else{
-          if(size>4)
-            {
-              print('Adds Range form 1 to 4');
-            }
-          else
-            {
-              adShowListener.onAdShowStart();
+          adShowListener.onAdShowStart();
 
-            }
         }
 
       }
